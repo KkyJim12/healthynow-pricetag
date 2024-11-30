@@ -1,10 +1,23 @@
 <template>
-  <main class="min-h-screen p-20 bg-gray-300">
+  <main
+    :class="
+      stage === 1
+        ? 'min-h-screen p-20 bg-gray-300'
+        : 'min-h-screen px-20 py-12 bg-gray-300'
+    "
+  >
     <div v-if="stage === 1" class="flex flex-col space-y-10">
       <div class="w-2/6 p-5 bg-white shadow-md rounded-xl">
         <div class="flex flex-col space-y-3">
           <h4 class="text-2xl font-semibold">Product Information</h4>
           <hr />
+          <input
+            v-model="code"
+            class="px-4 py-2 border border-gray-200 rounded shadow-md focus:outline-none"
+            type="text"
+            placeholder="Code"
+          />
+
           <input
             v-model="title"
             class="px-4 py-2 border border-gray-200 rounded shadow-md focus:outline-none"
@@ -47,6 +60,11 @@
               <div
                 class="relative flex flex-col h-full p-3 space-y-2 border-2 border-orange-400"
               >
+                <p
+                  class="absolute flex items-center text-xs font-bold text-gray-800 top-1 right-2"
+                >
+                  [{{ priceTag.code }}]
+                </p>
                 <h1 class="font-semibold text-gray-800 line-clamp-2">
                   {{ priceTag.title }}
                 </h1>
@@ -88,6 +106,11 @@
               <div
                 class="relative flex flex-col h-full p-3 space-y-2 border-2 border-orange-400"
               >
+                <p
+                  class="absolute flex items-center text-xs font-bold text-gray-800 top-1 right-2"
+                >
+                  [{{ priceTag.code }}]
+                </p>
                 <h1 class="font-semibold text-gray-800 line-clamp-2">
                   {{ priceTag.title }}
                 </h1>
@@ -124,6 +147,8 @@ import { ref, reactive } from "vue";
 
 const stage = ref(1);
 
+const code = ref("P-000");
+
 const title = ref(
   "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vero quod consequuntur ad, obcaecati repellendus accusantium totam harum vel molestiae voluptate, sed maiores quae suscipit corrupti ratione nihil officiis reprehenderit odit."
 );
@@ -132,7 +157,7 @@ const price = ref(888);
 const priceTags = ref([]);
 
 const save = () => {
-  priceTags.value.push({ title: title.value, price: price.value });
+  priceTags.value.push({ code: code, title: title.value, price: price.value });
 };
 
 const remove = (index) => {
