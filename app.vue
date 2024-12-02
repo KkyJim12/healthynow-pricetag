@@ -157,7 +157,7 @@ const price = ref(888);
 const priceTags = ref([]);
 
 const save = () => {
-  priceTags.value.push({ code: code, title: title.value, price: price.value });
+  priceTags.value.push({ code: code.value, title: title.value, price: price.value });
 };
 
 const remove = (index) => {
