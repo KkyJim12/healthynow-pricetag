@@ -7,53 +7,81 @@
     "
   >
     <div v-if="stage === 1" class="flex flex-col space-y-10">
-      <div class="w-2/6 p-5 bg-white shadow-md rounded-xl">
-        <div class="flex flex-col space-y-3">
-          <h4 class="text-2xl font-semibold">Product Information</h4>
-          <hr />
-          <input
-            v-model="code"
-            class="px-4 py-2 border border-gray-200 rounded shadow-md focus:outline-none"
-            type="text"
-            placeholder="Code"
-          />
+      <div class="flex gap-x-10">
+        <div class="w-2/6 p-5 bg-white shadow-md rounded-xl">
+          <div class="flex flex-col space-y-3">
+            <h4 class="text-2xl font-semibold">Product Information</h4>
+            <hr />
+            <input
+              v-model="code"
+              class="px-4 py-2 border border-gray-200 rounded shadow-md focus:outline-none"
+              type="text"
+              placeholder="Code"
+            />
 
-          <input
-            v-model="title"
-            class="px-4 py-2 border border-gray-200 rounded shadow-md focus:outline-none"
-            type="text"
-            placeholder="Title"
-          />
+            <input
+              v-model="title"
+              class="px-4 py-2 border border-gray-200 rounded shadow-md focus:outline-none"
+              type="text"
+              placeholder="Title"
+            />
 
-          <input
-            v-model="price"
-            class="px-4 py-2 border border-gray-200 rounded shadow-md focus:outline-none"
-            type="text"
-            placeholder="Price"
-            pattern="\d*"
-            maxlength="4"
-          />
+            <input
+              v-model="price"
+              class="px-4 py-2 border border-gray-200 rounded shadow-md focus:outline-none"
+              type="text"
+              placeholder="Price"
+              pattern="\d*"
+              maxlength="4"
+            />
+          </div>
+          <button
+            @click="save"
+            class="w-full py-2 mt-2 text-white duration-200 bg-green-500 rounded shadow-md hover:bg-green-600"
+            type="button"
+          >
+            Save
+          </button>
+          <button
+            @click="confirm"
+            class="w-full py-2 mt-2 text-white duration-200 bg-blue-500 rounded shadow-md hover:bg-blue-600"
+            type="button"
+          >
+            Export
+          </button>
         </div>
-        <button
-          @click="save"
-          class="w-full py-2 mt-2 text-white duration-200 bg-green-500 rounded shadow-md hover:bg-green-600"
-          type="button"
-        >
-          Save
-        </button>
-        <button
-          @click="confirm"
-          class="w-full py-2 mt-2 text-white duration-200 bg-blue-500 rounded shadow-md hover:bg-blue-600"
-          type="button"
-        >
-          Export
-        </button>
+        <div class="w-full p-5 bg-white shadow-md rounded-xl">
+          <div class="flex flex-col space-y-3">
+            <h4 class="text-2xl font-semibold">Add by JSON</h4>
+            <hr />
+            <textarea
+              v-model="json"
+              class="px-4 py-2 border border-gray-200 rounded shadow-md resize-none focus:outline-none"
+              placeholder="JSON"
+              rows="6"
+            ></textarea>
+            <button
+              @click="add"
+              class="w-full py-2 mt-2 text-white duration-200 bg-green-500 rounded shadow-md hover:bg-green-600"
+              type="button"
+            >
+              Add
+            </button>
+            <button
+              @click="clear"
+              class="w-full py-2 mt-2 text-white duration-200 bg-red-500 rounded shadow-md hover:bg-red-600"
+              type="button"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
       </div>
       <div class="grid grid-cols-12 gap-5">
         <div
           v-for="(priceTag, index) in priceTags"
           :key="index"
-          class="col-span-2"
+          class="col-span-3"
         >
           <div class="flex flex-col space-y-3">
             <div class="w-full h-40 p-2 bg-white">
@@ -99,7 +127,7 @@
         <div
           v-for="(priceTag, index) in priceTags"
           :key="index"
-          class="col-span-6"
+          class="col-span-4"
         >
           <div class="flex flex-col space-y-3">
             <div class="w-full h-40 p-2 bg-white border">
@@ -116,13 +144,13 @@
                 </h1>
                 <div class="z-40">
                   <img
-                    class="absolute w-24 bottom-3"
+                    class="absolute w-16 bottom-3"
                     src="/img/logo.png"
                     alt="logo"
                   />
                 </div>
                 <h4
-                  class="absolute flex items-center text-5xl font-bold text-gray-800 right-3 bottom-3"
+                  class="absolute flex items-center text-3xl font-bold text-gray-800 right-3 bottom-3"
                 >
                   <span>{{ priceTag.price }}</span>
                   <span class="overflow-hidden text-3xl font-semibold">฿</span>
@@ -145,6 +173,8 @@
 <script setup>
 import { ref, reactive } from "vue";
 
+const json = ref(null);
+
 const stage = ref(1);
 
 const code = ref("P-000");
@@ -157,7 +187,13 @@ const price = ref(888);
 const priceTags = ref([]);
 
 const save = () => {
-  priceTags.value.push({ code: code.value, title: title.value, price: price.value });
+  priceTags.value.push({
+    code: code.value,
+    title: title.value,
+    price: price.value,
+  });
+
+  console.log(priceTags.value);
 };
 
 const remove = (index) => {
@@ -166,6 +202,15 @@ const remove = (index) => {
 
 const confirm = () => {
   stage.value = 2;
+};
+
+const add = () => {
+  priceTags.value = priceTags.value.concat(JSON.parse(json.value));
+  console.log(priceTags.value);
+};
+
+const clear = () => {
+  json.value = null;
 };
 
 const back = () => {
