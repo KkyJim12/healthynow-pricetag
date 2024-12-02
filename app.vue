@@ -3,7 +3,7 @@
     :class="
       stage === 1
         ? 'min-h-screen p-20 bg-gray-300'
-        : 'min-h-screen px-20 py-12 bg-gray-300'
+        : 'min-h-screen px-20 bg-gray-300'
     "
   >
     <div v-if="stage === 1" class="flex flex-col space-y-10">
@@ -130,7 +130,7 @@
           class="col-span-4"
         >
           <div class="flex flex-col space-y-3">
-            <div class="w-full h-40 p-2 bg-white border">
+            <div class="w-full p-2 bg-white border h-36">
               <div
                 class="relative flex flex-col h-full p-3 space-y-2 border-2 border-orange-400"
               >
