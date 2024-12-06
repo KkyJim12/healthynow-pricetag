@@ -86,7 +86,7 @@
           <div class="flex flex-col space-y-3">
             <div class="w-full h-40 p-2 bg-white">
               <div
-                class="relative flex flex-col h-full p-3 space-y-2 border-2 border-orange-400"
+                class="relative flex flex-col h-full p-3 space-y-2 border-orange-400 border-t-6"
               >
                 <p
                   class="absolute flex items-center text-xs font-bold text-gray-800 top-1 right-2"
@@ -130,30 +130,35 @@
           class="col-span-4"
         >
           <div class="flex flex-col space-y-3">
-            <div class="w-full p-2 bg-white border h-36">
-              <div
-                class="relative flex flex-col h-full p-3 space-y-2 border-2 border-orange-400"
-              >
-                <p
-                  class="absolute flex items-center text-xs font-bold text-gray-800 top-1 right-2"
-                >
-                  [{{ priceTag.code }}]
-                </p>
-                <h1 class="font-semibold text-gray-800 line-clamp-2">
-                  {{ priceTag.title }}
-                </h1>
+            <div class="w-full p-2 bg-white border-4 border-orange-400 h-36">
+              <div class="relative flex flex-col h-full py-4 space-y-2">
                 <div class="z-40">
                   <img
-                    class="absolute w-16 bottom-3"
+                    class="absolute w-16 top-2"
                     src="/img/logo.png"
                     alt="logo"
                   />
                 </div>
+                <p
+                  class="absolute flex items-center text-[0.6rem] font-bold text-gray-800 top-0 right-2"
+                >
+                  [{{ priceTag.code }}]
+                </p>
+                <h1
+                  class="absolute text-[0.7rem] font-semibold text-gray-800 line-clamp-2 top-8 text-right"
+                >
+                  {{ priceTag.title }}
+                </h1>
+                <p
+                  class="absolute flex flex-col items-center text-[0.7rem] font-semibold text-gray-800 bottom-2 left-1"
+                >
+                  <span>PRICE:</span>
+                  <span>(Baht)</span>
+                </p>
                 <h4
-                  class="absolute flex items-center text-3xl font-bold text-gray-800 right-3 bottom-3"
+                  class="absolute bottom-0 flex items-center text-5xl font-bold text-gray-800 right-1"
                 >
                   <span>{{ priceTag.price }}</span>
-                  <span class="overflow-hidden text-3xl font-semibold">฿</span>
                 </h4>
               </div>
             </div>
