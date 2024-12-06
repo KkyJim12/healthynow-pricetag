@@ -145,7 +145,7 @@
                   [{{ priceTag.code }}]
                 </p>
                 <h1
-                  class="absolute text-[0.7rem] font-semibold text-gray-800 line-clamp-2 top-8 text-right"
+                  class="absolute text-[0.7rem] font-semibold text-gray-800 line-clamp-2 top-8 text-right right-0 w-5/6"
                 >
                   {{ priceTag.title }}
                 </h1>
